@@ -2,7 +2,7 @@
 (function (exports) {
   'use strict';
 
-  var Recase = exports.Recase || require('./recase')
+  var Recase = exports.Recase || require('../recase')
     , recase = Recase.create({ exceptions: { FOO: 'foo'} })
     , assert = require('assert')
     , snake

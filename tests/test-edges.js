@@ -1,6 +1,6 @@
 'use strict';
 
-var recase = require('./recase').create({ exceptions: { FOO: 'foo'} })
+var recase = require('../recase').create({ exceptions: { FOO: 'foo'} })
   , orig
   , snake
   , camel
