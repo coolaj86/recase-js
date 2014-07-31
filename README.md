@@ -8,7 +8,7 @@ In short:
 ```json
 { "fooBar": [
     { "baz": 1 }
-  , { "quxQuuxCorgeGrault": { "garplyWaldoFred": "plughXyzzyThud" } }
+  , { "_quxQuuxCorgeGrault": { "garplyWaldoFred": "plughXyzzyThud" } }
   ]
 }
 ```
@@ -18,10 +18,16 @@ becomes:
 ```json
 { "foo_bar": [
     { "baz": 1 }
-  , { "qux_quux_corge_grault": { "garply_waldo_fred": "plughXyzzyThud" } }
+  , { "_qux_quux_corge_grault": { "garply_waldo_fred": "plughXyzzyThud" } }
   ]
 }
 ```
+
+And can be converted back.
+
+Note that leading underscores `_` are considered as convention for private / special vars and are ingnored when changing case.
+
+If I ever support `CamelCaps` (first letter capital) I might use leading `$` for private / special.
 
 Usage
 =====
