@@ -17,6 +17,8 @@
       
       if (Array.isArray(val)) {
         toReturn[rkey] = deepCopyArr(val, recase);
+      } else if (val instanceof Date) {
+        toReturn[rkey] = new Date(val);
       } else if (null !== val && "object" === (typeof val)) {
         toReturn[rkey] = deepCopyObj(val, recase);
       } else {
@@ -34,6 +36,8 @@
     arr.forEach(function (val, i) {
       if (Array.isArray(val)) {
         toReturn[i] = deepCopyArr(val, recase);
+      } else if (val instanceof Date) {
+        toReturn[i] = new Date(val);
       } else if (null !== val && "object" === (typeof val)) {
         toReturn[i] = deepCopyObj(val, recase);
       } else {
@@ -49,6 +53,8 @@
 
     if (Array.isArray(orig)) {
       return deepCopyArr(orig);
+    } else if (orig instanceof Date) {
+      return new Date(orig);
     } else if (null !== orig && "object" === (typeof orig)) {
       return deepCopyObj(orig, recase);
     }

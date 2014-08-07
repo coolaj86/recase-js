@@ -8,6 +8,7 @@
     , snake
     , camel
     , _ = exports._ || require('lodash')
+    , d = new Date()
     ;
 
   snake = recase.snakeCopy({
@@ -18,6 +19,7 @@
       , { ___abcXyz: 1 }   // very very private
       ]
     }
+  , date: d
   });
 
   camel = recase.camelCopy({
@@ -28,6 +30,7 @@
       , { ___abc_xyz: 1 }   // very very private
       ]
     }
+  , date: d
   });
 
   assert.ok(_.isEqual(recase.camelCopy(snake), camel));
