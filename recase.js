@@ -4,62 +4,32 @@
   var _p
     ;
 
-  function deepCopyObj(obj, recase) {
-    var toReturn = {}
-      ;
-    
-    Object.keys(obj).forEach( function (key) {
-      var rkey = recase(key)
-        , val
-        ;
-
-      val = obj[key];
-      
-      if (Array.isArray(val)) {
-        toReturn[rkey] = deepCopyArr(val, recase);
-      } else if (val instanceof Date) {
-        toReturn[rkey] = new Date(val);
-      } else if (null !== val && "object" === (typeof val)) {
-        toReturn[rkey] = deepCopyObj(val, recase);
-      } else {
-        toReturn[rkey] = val;
-      }
-    });
-    
-    return toReturn;
-  }
-
-  function deepCopyArr(arr, recase) {
-    var toReturn = []
-      ;
-    
-    arr.forEach(function (val, i) {
-      if (Array.isArray(val)) {
-        toReturn[i] = deepCopyArr(val, recase);
-      } else if (val instanceof Date) {
-        toReturn[i] = new Date(val);
-      } else if (null !== val && "object" === (typeof val)) {
-        toReturn[i] = deepCopyObj(val, recase);
-      } else {
-        toReturn[i] = val;
-      }
-    });
-    
-    return toReturn;
-  }
-
   function deepCopy(orig, recase) {
+    var toReturn
+      ;
+
     recase = recase || function (key) { return key; };
 
     if (Array.isArray(orig)) {
-      return deepCopyArr(orig);
+      toReturn = [];
+      orig.forEach(function (val, i) {
+        toReturn[i] = deepCopy(val, recase);
+      });
+      return toReturn;
     } else if (orig instanceof Date) {
       return new Date(orig);
     } else if (null !== orig && "object" === (typeof orig)) {
-      return deepCopyObj(orig, recase);
-    }
+      toReturn = {};
+      Object.keys(orig).forEach( function (key) {
+        var rkey = recase(key)
+          ;
 
-    return orig;
+        toReturn[rkey] = deepCopy(orig[key], recase);
+      });
+      return toReturn;
+    } else {
+      return orig;
+    }
   }
 
   function Recase(opts) {
