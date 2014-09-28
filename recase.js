@@ -97,4 +97,4 @@
 
   exports.Recase = Recase;
   if ('undefined' !== typeof module) { module.exports = Recase; }
-}('undefined' !== typeof exports && exports || new Function('return this')()));
+}('undefined' !== typeof exports && exports || 'undefined' !== typeof window && window || global));
